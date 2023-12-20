@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<front>
+	<title>Doubly Linked List</title>
+	<script type="text/javascript">
+		class node {
+			constructor() {
+				this.info = document.getElementById("intvalue").value;
+				this.prev = null;
+				this.next = null;
+			}
+		}
+		class doublylist {
+			constructor() {
+				this.front = null;
+				this.rear = null;
+			}
+			create() {
+				var temp = new node();
+				if (this.front == null) {
+					temp.prev = null;
+					temp.next = null;
+					this.front = temp;
+					this.rear = temp;
+				}
+				else {
+					temp.prev = this.rear;
+					temp.next = null;
+					this.rear.next = temp;
+					this.rear = temp;
+				}
+				alert("Element Added");
+				document.getElementById("intvalue").value = "";
+			}
+			insertfirst() {
+				var temp = new node();
+
+				if (this.front == null) {
+					temp.prev = null;
+					temp.next = null;
+					this.front = temp;
+					this.rear = temp;
+				}
+				else {
+					temp.prev = null;
+					temp.next = this.front;
+					this.front.prev = temp;
+					this.front = temp;
+				}
+				alert("Element Added At First Position");
+
+				document.getElementById("intvalue").value = "";
+			}
+			insertlast() {
+				var temp = new node();
+				if (this.front == null) {
+					temp.prev = null;
+					temp.next = null;
+					this.front = temp;
+					this.rear = temp;
+				}
+				else {
+					temp.prev = this.rear;
+					temp.next = null;
+					this.rear.next = temp;
+					this.rear = temp;
+				}
+				alert("Element Added At Last Position");
+
+				document.getElementById("intvalue").value = "";
+			}
+
+			deletefirst() {
+				if (this.front == null) {
+					alert("List Is Empty.");
+				}
+				else {
+					var deletedelement = this.front.info;
+					this.front = this.front.next;
+					alert("Element Deleted From First Position. Deleted Element is " + deletedelement);
+				}
+			}
+			deletelast() {
+				var deletedelement;
+				if (this.front == null) {
+					alert("List Is Empty.");
+				}
+				if (this.front.next == null) {
+					deletedelement = this.rear.info;
+					this.front = null;
+					this.rear = null;
+					alert("Element Deleted From First Position. Deleted Element is " + deletedelement);
+				}
+				else {
+					deletedelement = this.rear.info;
+					this.rear.prev.next = null;
+					this.rear = this.rear.prev;
+					alert("Element Deleted From First Position. Deleted Element is " + deletedelement);
+				}
+			}
+
+			display() {
+				var curr = this.front;
+				if (this.front == null) {
+					document.getElementById("printhere").innerHTML = "";
+					alert("List is Empty.");
+				}
+				else {
+					var str = "Representation of Linked List is <br>front <--> ";
+					while (curr) {
+						str = str + curr.info + " <--> ";
+						curr = curr.next;
+					}
+					document.getElementById("printhere").innerHTML = str + "rear";
+				}
+			}
+			reversedisplay() {
+				var curr = this.rear;
+				if (curr != null) {
+					var str = "Representation of Linked List is <br>rear <--> ";
+					while (curr) {
+						str = str + curr.info + " <--> ";
+						curr = curr.prev;
+					}
+					document.getElementById("printhere").innerHTML = str + "front";
+				}
+				else {
+					document.getElementById("printhere").innerHTML = "";
+					alert("List is Empty.");
+				}
+			}
+		}
+		var obj = new doublylist();
+	</script>
+</front>
+
+<body>
+	<label>Doubly Linked List</label><br><br>
+	<label>Enter Value : </label>
+	<input type="text" id="intvalue"><br>
+	<button id="btninsert" onclick="obj.insertposition.call(obj)" style="display: none;">Insert</button>
+	<button id="btndelete" onclick="obj.deleteposition.call(obj)" style="display: none;">Delete</button><br><br>
+	<button onclick="obj.create.call(obj)">Create</button>
+	<button onclick="obj.insertfirst.call(obj)">Insert At First</button>
+	<button onclick="obj.insertlast.call(obj)">Insert At Last</button>
+	<button onclick="obj.deletefirst.call(obj)">Delete At First</button>
+	<button onclick="obj.deletelast.call(obj)">Delete At Last</button>
+	<button onclick="obj.display.call(obj)">Display</button><br><br>
+	<button onclick="obj.reversedisplay.call(obj)">Reverse Display</button><br><br>
+	<h3 id="printhere" style="font-family:Comic Sans MS;"></h3>
+</body>
+
+</html>

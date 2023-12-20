@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <title>Linear Queue</title>
+    <script>
+        class Node {
+            constructor() {
+                this.data = document.getElementById("inputstr").value;
+                this.next = null;
+            }
+        }
+        class Queue {
+            constructor() {
+                this.front = null;
+                this.rear = null;
+            }
+            insert() {
+                var temp = new Node();
+                if (this.rear == null) {
+                    this.front = temp;
+                    this.rear = temp;
+                }
+                else {
+                    this.rear.next = temp;
+                    this.rear = temp;
+                }
+            }
+            display() {
+                if (this.front == null) {
+                    document.getElementById("outputstr").innerHTML = "Queue is Empty";
+                }
+                else {
+                    var curr = this.front;
+                    var str = "Elements of Linear Queue are : <br>Front --> ";
+                    while (curr != null) {
+                        str = str + curr.data + " --> ";
+                        curr = curr.next;
+                    }
+                    document.getElementById("outputstr").innerHTML = str + "Rear";
+                }
+            }
+            delete() {
+                if (this.front == null) {
+                    document.getElementById("outputstr").innerHTML = "Queue is Empty";
+                }
+                else {
+                    var temp = this.front;
+                    this.front = this.front.next;
+                    if (this.front == null) {
+                        this.rear = null;
+                    }
+                    document.getElementById("outputstr").innerHTML = "Deleted Element is : " + temp.data;
+                }
+            }
+        }
+        var obj = new Queue();
+    </script>
+</head>
+
+<body>
+    <label>Linear Queue Using Linked List :</label>
+    <br><br>
+    <label>Enter Element Here : </label>
+    <input type="text" id="inputstr" />
+    <br><br>
+    <button onclick="obj.insert.call(obj)">Insert</button>
+    <button onclick="obj.delete.call(obj)">Delete</button>
+    <button onclick="obj.display.call(obj)">Display</button>
+    <br><br>
+    <p id="outputstr"></p>
+</body>
+
+</html>
